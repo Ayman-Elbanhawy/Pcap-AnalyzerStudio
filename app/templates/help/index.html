@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pcap Analyzer Studio Help Center</title>
+    <style>
+        :root {
+            --ink: #102033;
+            --muted: #5b6f82;
+            --panel: #ffffff;
+            --line: #d6e0ea;
+            --brand: #0f5f92;
+            --brand-2: #1a8bb8;
+            --accent: #d67c2f;
+            --bg: linear-gradient(135deg, #eff4f8 0%, #dde7f0 48%, #c9d8e6 100%);
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--ink);
+            background: var(--bg);
+        }
+        .shell {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 28px;
+        }
+        .hero {
+            background: linear-gradient(135deg, rgba(16,32,51,0.95), rgba(15,95,146,0.92));
+            color: #fff;
+            border-radius: 22px;
+            padding: 28px 30px;
+            box-shadow: 0 20px 60px rgba(16, 32, 51, 0.18);
+        }
+        .hero h1 {
+            margin: 0 0 10px;
+            font-size: 34px;
+            letter-spacing: 0.02em;
+        }
+        .hero p {
+            margin: 0 0 18px;
+            max-width: 900px;
+            color: rgba(255,255,255,0.88);
+            line-height: 1.6;
+        }
+        .hero-actions a {
+            display: inline-block;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            padding: 10px 16px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .hero-actions .primary {
+            background: #fff;
+            color: var(--brand);
+        }
+        .hero-actions .secondary {
+            background: rgba(255,255,255,0.14);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.28);
+        }
+        .layout {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 22px;
+            margin-top: 22px;
+        }
+        .menu, .panel {
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.55);
+            border-radius: 22px;
+            box-shadow: 0 16px 40px rgba(16, 32, 51, 0.08);
+        }
+        .menu {
+            padding: 18px;
+            position: sticky;
+            top: 18px;
+            height: fit-content;
+        }
+        .menu h2 {
+            margin: 0 0 12px;
+            font-size: 18px;
+        }
+        .menu a {
+            display: block;
+            padding: 10px 12px;
+            margin-bottom: 6px;
+            border-radius: 12px;
+            color: var(--ink);
+            text-decoration: none;
+            background: #f4f8fb;
+        }
+        .menu a:hover { background: #e7f1f8; }
+        .panel {
+            padding: 24px;
+        }
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+        .tab-button {
+            border: none;
+            background: #edf4f8;
+            color: var(--ink);
+            padding: 11px 14px;
+            border-radius: 999px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .tab-button.active {
+            background: linear-gradient(135deg, var(--brand), var(--brand-2));
+            color: #fff;
+        }
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; }
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+            margin: 18px 0;
+        }
+        .card {
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            padding: 18px;
+            background: var(--panel);
+        }
+        .card h3 {
+            margin-top: 0;
+            font-size: 19px;
+        }
+        .steps {
+            margin: 0;
+            padding-left: 20px;
+            line-height: 1.7;
+        }
+        .feature-list {
+            margin: 0;
+            padding-left: 20px;
+            line-height: 1.7;
+        }
+        .shot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+        }
+        figure {
+            margin: 0;
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            overflow: hidden;
+            background: #fff;
+        }
+        figure img {
+            width: 100%;
+            display: block;
+        }
+        figure figcaption {
+            padding: 12px 14px;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+        .callout {
+            margin: 18px 0;
+            padding: 16px 18px;
+            border-left: 5px solid var(--accent);
+            background: #fff7ef;
+            border-radius: 14px;
+        }
+        .meta {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.14);
+            margin-bottom: 14px;
+            font-size: 12px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+        @media (max-width: 920px) {
+            .layout {
+                grid-template-columns: 1fr;
+            }
+            .menu {
+                position: static;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="shell">
+    <section class="hero" id="overview">
+        <div class="meta">Pcap Analyzer Studio Help Center</div>
+        <h1>Analyze packet captures from upload to evidence export.</h1>
+        <p>
+            This help center documents the current public repository build of Pcap Analyzer Studio,
+            including the Windows launcher, analysis dashboards, extraction tools, and GitHub
+            project links. It is intended to match the application as shipped in this repository.
+        </p>
+        <div class="hero-actions">
+            <a class="primary" href="{{ github_repository }}" target="_blank">Open GitHub Repository</a>
+            <a class="secondary" href="{{ url_for('upload') }}">Open Upload Page</a>
+        </div>
+    </section>
+
+    <div class="layout">
+        <nav class="menu">
+            <h2>Sections</h2>
+            <a href="#overview">Overview</a>
+            <a href="#workflow">Workflow</a>
+            <a href="#features">Features</a>
+            <a href="#screenshots">Screenshots</a>
+            <a href="#deployment">Deployment</a>
+        </nav>
+
+        <main class="panel">
+            <div class="tabs">
+                <button class="tab-button active" data-tab="tab-workflow">Workflow</button>
+                <button class="tab-button" data-tab="tab-features">Feature Guide</button>
+                <button class="tab-button" data-tab="tab-screens">Screenshots</button>
+                <button class="tab-button" data-tab="tab-deploy">Deployment</button>
+            </div>
+
+            <section class="tab-panel active" id="tab-workflow">
+                <h2 id="workflow">Recommended Workflow</h2>
+                <ol class="steps">
+                    <li>Open the application and upload a `.pcap`, `.cap`, or `.pcapng` file from the Home page.</li>
+                    <li>Use <strong>Basic Information</strong> to review decoded packets and inspect packet details in the modal dialog.</li>
+                    <li>Use <strong>Protocol Analysis</strong> and <strong>Traffic Analysis</strong> to understand protocol mix, time-based traffic changes, and top peers.</li>
+                    <li>Open <strong>Access Map</strong> to visualize remote endpoints and geographic lookups when GeoIP data is available.</li>
+                    <li>Use the extraction menus for Web, Mail, FTP, Telnet, client fingerprints, sensitive data, warnings, and recovered files.</li>
+                    <li>Export evidence where needed, including packet-detail PDF output and extracted files from the runtime folders.</li>
+                </ol>
+                <div class="callout">
+                    The app currently keeps one loaded capture in memory for the active desktop session. Load a new file when you want to switch investigations.
+                </div>
+            </section>
+
+            <section class="tab-panel" id="tab-features">
+                <h2 id="features">Feature Guide</h2>
+                <div class="card-grid">
+                    <article class="card">
+                        <h3>Data Analysis</h3>
+                        <ul class="feature-list">
+                            <li>Basic packet table with protocol and endpoint filtering.</li>
+                            <li>Packet-detail modal backed by Scapy decoding.</li>
+                            <li>Protocol summary charts and DNS or HTTP endpoint statistics.</li>
+                            <li>Traffic charts for relative time, direction, peers, and byte totals.</li>
+                        </ul>
+                    </article>
+                    <article class="card">
+                        <h3>Data Extraction</h3>
+                        <ul class="feature-list">
+                            <li>Session recovery for Web, Mail, FTP, and Telnet traffic.</li>
+                            <li>Client information summaries and sensitive-value extraction.</li>
+                            <li>Warning views for suspicious or noteworthy capture content.</li>
+                        </ul>
+                    </article>
+                    <article class="card">
+                        <h3>File Recovery</h3>
+                        <ul class="feature-list">
+                            <li>Recover Web, Mail, and FTP transferred files.</li>
+                            <li>Recover all detected binary artifacts into runtime export folders.</li>
+                            <li>Download renamed files safely through the browser.</li>
+                        </ul>
+                    </article>
+                    <article class="card">
+                        <h3>Project Links</h3>
+                        <ul class="feature-list">
+                            <li>GitHub repository: <a href="{{ github_repository }}" target="_blank">{{ github_repository }}</a></li>
+                            <li>Windows startup script: <code>StartMe.bat</code></li>
+                            <li>Windows EXE build script: <code>build_exe.bat</code></li>
+                        </ul>
+                    </article>
+                </div>
+            </section>
+
+            <section class="tab-panel" id="tab-screens">
+                <h2 id="screenshots">Application Screenshots</h2>
+                <p>The screenshots below should reflect the current repository build and are intended for both the in-app help center and the GitHub README.</p>
+                <div class="shot-grid">
+                    <figure>
+                        <img src="{{ url_for('static', filename='help/home-dashboard.png') }}" alt="Pcap Analyzer Studio home dashboard">
+                        <figcaption>Home and upload experience with GitHub and Help Center entry points.</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="{{ url_for('static', filename='help/protocol-analysis.png') }}" alt="Protocol analysis dashboard">
+                        <figcaption>Protocol Analysis dashboard showing summary charts and top destinations.</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="{{ url_for('static', filename='help/traffic-analysis.png') }}" alt="Traffic analysis dashboard">
+                        <figcaption>Traffic Analysis dashboard with time, direction, protocol, and peer views.</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="{{ url_for('static', filename='help/help-center.png') }}" alt="Help center page">
+                        <figcaption>Professional HTML help center with menu navigation and tabbed sections.</figcaption>
+                    </figure>
+                </div>
+            </section>
+
+            <section class="tab-panel" id="tab-deploy">
+                <h2 id="deployment">Deployment and Packaging</h2>
+                <ul class="feature-list">
+                    <li><strong>Local run:</strong> use <code>StartMe.bat</code> to create the virtual environment, install dependencies, and launch the browser.</li>
+                    <li><strong>Developer run:</strong> use <code>python run.py</code> after installing the requirements.</li>
+                    <li><strong>Windows EXE:</strong> use <code>build_exe.bat</code> to build <code>dist\PcapAnalyzer.exe</code> with PyInstaller.</li>
+                    <li><strong>Repository:</strong> public source, help, screenshots, and packaging notes live at <a href="{{ github_repository }}" target="_blank">{{ github_repository }}</a>.</li>
+                </ul>
+            </section>
+        </main>
+    </div>
+</div>
+
+<script>
+    (function () {
+        var buttons = document.querySelectorAll(".tab-button");
+        var panels = document.querySelectorAll(".tab-panel");
+
+        buttons.forEach(function (button) {
+            button.addEventListener("click", function () {
+                buttons.forEach(function (item) { item.classList.remove("active"); });
+                panels.forEach(function (item) { item.classList.remove("active"); });
+                button.classList.add("active");
+                document.getElementById(button.getAttribute("data-tab")).classList.add("active");
+            });
+        });
+    }());
+</script>
+</body>
+</html>
