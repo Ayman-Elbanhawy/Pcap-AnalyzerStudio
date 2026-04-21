@@ -43,9 +43,10 @@ if not exist "%ROOT%runtime\Files\PDF" mkdir "%ROOT%runtime\Files\PDF"
 for /f %%P in ('powershell -NoProfile -Command "$start=8000; foreach ($p in $start..($start+19)) { $listener = [System.Net.Sockets.TcpListener]::new([Net.IPAddress]::Loopback, $p); try { $listener.Start(); $listener.Stop(); Write-Output $p; break } catch { if ($listener) { try { $listener.Stop() } catch {} } } }"') do set "APP_PORT=%%P"
 if "%APP_PORT%"=="" set "APP_PORT=8000"
 set "APP_URL=http://127.0.0.1:%APP_PORT%/"
+set "PCAP_ANALYZER_PORT=%APP_PORT%"
 
 echo [Pcap-AnalyzerStudio] Starting server at %APP_URL%
-start "Pcap-AnalyzerStudio Server" /d "%ROOT%" cmd /k "set PCAP_ANALYZER_PORT=%APP_PORT% && \"%PY%\" \"%ROOT%run.py\""
+start "Pcap-AnalyzerStudio Server" /d "%ROOT%" cmd /k ""%PY%" "%ROOT%run.py""
 
 echo [Pcap-AnalyzerStudio] Waiting for the server to start...
 timeout /t 4 /nobreak >nul
